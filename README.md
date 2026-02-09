@@ -39,5 +39,5 @@ The workflow requires two repository secrets (Settings > Secrets and variables >
 To deploy manually:
 
 ```sh
-npx wrangler deploy
+pnpx wrangler deploy
 ```
