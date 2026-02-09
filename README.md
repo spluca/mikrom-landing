@@ -1,5 +1,7 @@
 # Mikrom Landing
 
+[![Build & Deploy](https://github.com/spluca/mikrom-landing/actions/workflows/deploy.yml/badge.svg)](https://github.com/spluca/mikrom-landing/actions/workflows/deploy.yml)
+
 Marketing and landing page for [Mikrom](https://www.mikrom.es), a microservices platform for Firecracker microVMs.
 
 Built with **Astro 5** and deployed to **Cloudflare Workers**.
