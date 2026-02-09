@@ -1,46 +1,43 @@
-# Astro Starter Kit: Basics
+# Mikrom Landing
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Marketing and landing page for [Mikrom](https://www.mikrom.es), a microservices platform for Firecracker microVMs.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Built with **Astro 5** and deployed to **Cloudflare Workers**.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/             # Static files (favicons)
+├── src/
+│   ├── assets/         # Images/SVGs processed by Astro
+│   ├── components/     # Reusable Astro components
+│   ├── layouts/        # Page layout wrappers
+│   └── pages/          # File-based routing
+├── astro.config.mjs    # Astro config (Cloudflare adapter)
+└── wrangler.jsonc      # Cloudflare Workers config
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Commands
 
-## 🧞 Commands
+| Command        | Action                                      |
+| :------------- | :------------------------------------------ |
+| `pnpm install` | Install dependencies                        |
+| `pnpm dev`     | Start dev server at `localhost:4321`         |
+| `pnpm build`   | Build production site to `./dist/`           |
+| `pnpm preview` | Preview production build locally             |
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Pushes to `main` trigger a GitHub Actions workflow that builds and deploys to Cloudflare Workers automatically.
 
-## 👀 Want to learn more?
+The workflow requires two repository secrets (Settings > Secrets and variables > Actions):
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `CLOUDFLARE_API_TOKEN` — API token with Workers edit permissions
+- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
+
+To deploy manually:
+
+```sh
+npx wrangler deploy
+```
