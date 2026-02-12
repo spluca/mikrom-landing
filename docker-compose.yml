@@ -1,0 +1,9 @@
+services:
+  landing:
+    build: .
+    container_name: mikrom-landing
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped

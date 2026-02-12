@@ -1,0 +1,35 @@
+---
+import Layout from './Layout.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { getLangFromUrl } from '@/i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={image}
+  lang={lang}
+>
+  <div class="flex flex-col min-h-screen">
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -11,8 +11,19 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.7.0",
+    "@iconify-json/lucide": "^1.2.90",
+    "@iconify-json/simple-icons": "^1.2.70",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
-		"@astrojs/cloudflare": "^12.6.12"
+    "astro-icon": "^1.1.5",
+    "chart.js": "^4.5.1",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.54.0",

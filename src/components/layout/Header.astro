@@ -1,0 +1,157 @@
+---
+import { siteConfig } from '@/config';
+import { Icon } from 'astro-icon/components';
+import ThemeToggle from '../ui/ThemeToggle.astro';
+import LanguageToggle from '../ui/LanguageToggle.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const langPrefix = lang === 'es' ? '' : `/${lang}`;
+
+const navigation = [
+  { label: t('nav.features'), href: `${langPrefix}/#features` },
+  { label: t('nav.docs'), href: 'https://github.com/spluca/mikrom/tree/main/docs' },
+  { label: t('nav.pricing'), href: `${langPrefix}/pricing` },
+];
+
+const cta = [
+  { label: t('nav.github'), href: 'https://github.com/spluca/mikrom', variant: 'ghost' },
+  { label: t('nav.start'), href: `${langPrefix}/get-started`, variant: 'primary' },
+];
+
+const primaryCTA = cta.find((item) => item.variant === 'primary');
+const ghostCTAs = cta.filter((item) => item.variant === 'ghost');
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 p-0 bg-background/80 backdrop-blur-md border-b border-border"
+>
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo / Site Name -->
+      <a href={lang === 'es' ? '/' : `/${lang}`} class="flex items-center gap-2 font-semibold text-lg text-text">
+        {
+          siteConfig.logo && (
+            <img src={siteConfig.logo} alt={siteConfig.name} class="h-8 w-8" />
+          )
+        }
+        <span>{siteConfig.name}</span>
+      </a>
+
+      <!-- Desktop Navigation - Center -->
+      <div class="hidden md:flex items-center gap-8">
+        {
+          navigation.map((item) => (
+            <a
+              href={item.href}
+              class="text-text-muted hover:text-primary transition-colors text-sm font-medium"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Desktop Actions - Right -->
+      <div class="hidden md:flex items-center gap-4">
+        <LanguageToggle />
+        <ThemeToggle />
+        {
+          ghostCTAs.map((cta) => (
+            <a
+              href={cta.href}
+              class="text-text-muted hover:text-text transition-colors text-sm font-medium px-3 py-2"
+            >
+              {cta.label}
+            </a>
+          ))
+        }
+        {
+          primaryCTA && (
+            <a
+              href={primaryCTA.href}
+              class="px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors shadow-sm"
+            >
+              {primaryCTA.label}
+            </a>
+          )
+        }
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="flex items-center gap-4 md:hidden">
+        <LanguageToggle />
+        <ThemeToggle />
+        <button
+          id="mobile-menu-button"
+          type="button"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="p-2 text-text-muted hover:text-text"
+        >
+          <Icon name="lucide:menu" id="menu-icon-open" class="w-6 h-6" />
+          <Icon name="lucide:x" id="menu-icon-close" class="hidden w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Overlay -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background">
+    <div class="px-4 py-6 space-y-4">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            class="block text-base font-medium text-text-muted hover:text-primary"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="border-t border-border pt-4 mt-4 space-y-4">
+        {
+          ghostCTAs.map((cta) => (
+            <a
+              href={cta.href}
+              class="block text-base font-medium text-text-muted hover:text-text"
+            >
+              {cta.label}
+            </a>
+          ))
+        }
+        {
+          primaryCTA && (
+            <a
+              href={primaryCTA.href}
+              class="block w-full text-center px-4 py-3 rounded-md bg-primary text-white font-medium hover:bg-primary-dark"
+            >
+              {primaryCTA.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIconOpen = document.getElementById('menu-icon-open');
+  const menuIconClose = document.getElementById('menu-icon-close');
+
+  function toggleMenu() {
+    const isExpanded = mobileMenuButton?.getAttribute('aria-expanded') === 'true';
+    mobileMenuButton?.setAttribute('aria-expanded', (!isExpanded).toString());
+    mobileMenu?.classList.toggle('hidden');
+    menuIconOpen?.classList.toggle('hidden');
+    menuIconClose?.classList.toggle('hidden');
+  }
+
+  mobileMenuButton?.addEventListener('click', toggleMenu);
+</script>

@@ -1,0 +1,102 @@
+---
+import { siteConfig } from '@/config';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const langPrefix = lang === 'es' ? '' : `/${lang}`;
+
+const footerNav = {
+  product: [
+    { label: t('nav.features'), href: `${langPrefix}/#features` },
+    { label: 'Firecracker', href: 'https://firecracker-microvm.github.io/' },
+    { label: 'Go', href: 'https://go.dev' },
+  ],
+  resources: [
+    { label: t('nav.docs'), href: 'https://github.com/spluca/mikrom/tree/main/docs' },
+    { label: 'GitHub', href: 'https://github.com/spluca/mikrom' },
+  ],
+  company: [
+    { label: 'Antonio Pardo', href: 'https://github.com/spluca' },
+  ],
+  legal: [
+    { label: 'Status', href: '#' },
+    { label: 'Uptime', href: '#' },
+  ],
+};
+---
+
+<footer class="bg-background border-t border-border mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-sm font-semibold text-text tracking-wider uppercase mb-4">{t('footer.product')}</h3>
+        <ul role="list" class="space-y-3">
+          {
+            footerNav.product.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-text-muted hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-text tracking-wider uppercase mb-4">{t('footer.resources')}</h3>
+        <ul role="list" class="space-y-3">
+          {
+            footerNav.resources.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-text-muted hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-text tracking-wider uppercase mb-4">{t('footer.company')}</h3>
+        <ul role="list" class="space-y-3">
+          {
+            footerNav.company.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-text-muted hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-text tracking-wider uppercase mb-4">{t('footer.legal')}</h3>
+        <ul role="list" class="space-y-3">
+          {
+            footerNav.legal.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-text-muted hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-base text-text-muted text-center md:text-left">
+        &copy; {new Date().getFullYear()} {siteConfig.name}. {lang === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}
+      </p>
+      <div class="flex space-x-6">
+        <a href={siteConfig.social.github} class="text-text-muted hover:text-primary transition-colors">
+          <span class="sr-only">GitHub</span>
+          <Icon name="simple-icons:github" class="h-6 w-6" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
