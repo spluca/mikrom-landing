@@ -1,45 +1,74 @@
-# Mikrom Landing
+# Mikrom Landing 🛡️🚀
 
 [![Build & Deploy](https://github.com/spluca/mikrom-landing/actions/workflows/deploy.yml/badge.svg)](https://github.com/spluca/mikrom-landing/actions/workflows/deploy.yml)
 
-Marketing and landing page for [Mikrom](https://www.mikrom.es), a microservices platform for Firecracker microVMs.
+The high-performance marketing and landing page for **[Mikrom](https://www.mikrom.es)**, a cutting-edge microservices platform based on Firecracker microVMs and Go.
 
-Built with **Astro 5** and deployed to **Cloudflare Workers**.
+## ✨ Features
 
-## Project Structure
+- **🌍 Full i18n Support**: Native internationalization with Astro. Multi-language support (English/Spanish).
+- **🐳 Dockerized**: Production-ready containerization for local development and deployment.
+- **⚡ Ultra-fast**: Built with **Astro 5** for minimal JS and maximum speed.
+- **🎨 Modern Design**: Beautiful, responsive UI with OKLCH colors, fluid animations (Scroll Reveal / Parallax), and Dark Mode support.
+- **☁️ Cloudflare Ready**: Optimized for deployment on Cloudflare Workers.
+
+## 🚀 Getting Started
+
+### Using Docker (Recommended)
+
+Run the entire stack instantly:
+
+```bash
+docker compose up -d --build
+```
+
+Access the site at:
+- **Spanish**: [http://localhost:4321](http://localhost:4321)
+- **English**: [http://localhost:4321/en](http://localhost:4321/en)
+
+### Local Development
+
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Start development server:**
+   ```bash
+   pnpm dev
+   ```
+
+3. **Build for production:**
+   ```bash
+   pnpm build
+   ```
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro 5](https://astro.build)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com) (with OKLCH colors)
+- **Icons**: [Astro Icon](https://github.com/natemoo-re/astro-icon) (Lucide)
+- **Deployment**: [Cloudflare Workers](https://workers.cloudflare.com/)
+- **Runtime**: [Docker](https://www.docker.com/)
+
+## 📂 Project Structure
 
 ```text
 /
-├── public/             # Static files (favicons)
+├── public/             # Static assets (logos, icons)
 ├── src/
-│   ├── assets/         # Images/SVGs processed by Astro
-│   ├── components/     # Reusable Astro components
+│   ├── components/     # Reusable UI components
+│   │   ├── layout/     # Header, Footer, Hero
+│   │   ├── sections/   # Feature specific sections
+│   │   └── ui/         # Theme/Lang toggles
+│   ├── i18n/           # Translation dictionaries & utils
 │   ├── layouts/        # Page layout wrappers
-│   └── pages/          # File-based routing
-├── astro.config.mjs    # Astro config (Cloudflare adapter)
-└── wrangler.jsonc      # Cloudflare Workers config
+│   ├── pages/          # i18n routes (es, en)
+│   └── lib/            # Shared types and utilities
+├── astro.config.mjs    # Astro configuration
+└── docker-compose.yml  # Docker orchestration
 ```
 
-## Commands
+## 📄 License
 
-| Command        | Action                                      |
-| :------------- | :------------------------------------------ |
-| `pnpm install` | Install dependencies                        |
-| `pnpm dev`     | Start dev server at `localhost:4321`         |
-| `pnpm build`   | Build production site to `./dist/`           |
-| `pnpm preview` | Preview production build locally             |
-
-## Deployment
-
-Pushes to `main` trigger a GitHub Actions workflow that builds and deploys to Cloudflare Workers automatically.
-
-The workflow requires two repository secrets (Settings > Secrets and variables > Actions):
-
-- `CLOUDFLARE_API_TOKEN` — API token with Workers edit permissions
-- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
-
-To deploy manually:
-
-```sh
-pnpx wrangler deploy
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
