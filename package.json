@@ -31,5 +31,5 @@
     "eslint-plugin-astro": "^1.5.0",
     "wrangler": "^4.63.0"
   },
-  "packageManager": "pnpm@10.28.2"
+  "packageManager": "pnpm@10.30.3"
 }
